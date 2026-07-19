@@ -111,3 +111,16 @@ public struct MapItemModel: Hashable, Identifiable, Sendable {
         self.long = long
     }
 }
+
+public struct SearchTerms: Hashable, Sendable {
+    public var artist: String?
+    public var venue: String?
+    public var usState: String?
+    
+    public init(artist: String? = nil, venue: String? = nil, usState: String? = nil) {
+        self.artist = artist
+        self.venue = venue
+        self.usState = usState
+    }
+}
+

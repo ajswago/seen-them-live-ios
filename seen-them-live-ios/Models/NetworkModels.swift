@@ -204,3 +204,26 @@ public struct Song: Codable, Hashable, Sendable {
         self.tape = tape
     }
 }
+
+public struct SetlistResponse: Codable, Hashable, Sendable {
+    public let type: String?
+    public let itemsPerPage: Int?
+    public let page: Int?
+    public let total: Int?
+    public let setlist: [Setlist]?
+    
+    public init(
+        type: String? = nil,
+        itemsPerPage: Int? = nil,
+        page: Int? = nil,
+        total: Int? = nil,
+        setlist: [Setlist]? = nil
+    ) {
+        self.type = type
+        self.itemsPerPage = itemsPerPage
+        self.page = page
+        self.total = total
+        self.setlist = setlist
+    }
+}
+
