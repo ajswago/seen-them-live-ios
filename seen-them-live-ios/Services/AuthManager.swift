@@ -75,6 +75,11 @@ public final class AuthManager {
             self.user = authResult.user
             self.isAuthenticated = true
         } catch {
+            let nsError = error as NSError
+            if nsError.domain == kGIDSignInErrorDomain && nsError.code == GIDSignInError.canceled.rawValue {
+                self.isLoading = false
+                return
+            }
             self.errorMessage = error.localizedDescription
         }
         
