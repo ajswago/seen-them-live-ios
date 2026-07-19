@@ -92,7 +92,13 @@ public struct TrackModel: Hashable, Sendable {
     }
 }
 
-public struct MapItemModel: Hashable, Sendable {
+public struct MapItemModel: Hashable, Identifiable, Sendable {
+    public var id: String {
+        if let name, !name.isEmpty {
+            return name
+        }
+        return "\(lat ?? 0),\(long ?? 0)"
+    }
     public let name: String?
     public let count: Int?
     public let lat: Double?

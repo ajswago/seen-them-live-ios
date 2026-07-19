@@ -89,11 +89,6 @@ public struct Artist: Codable, Hashable, Sendable {
         self.disambiguation = disambiguation
         self.url = url
     }
-    
-    // Quick rename support for mmid to tmid parameter name matching
-    private enum CodingKeys: String, CodingKey {
-        case mbid, tmid, name, sortName, disambiguation, url
-    }
 }
 
 public struct Venue: Codable, Hashable, Sendable {
