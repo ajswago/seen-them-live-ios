@@ -227,3 +227,101 @@ public struct SetlistResponse: Codable, Hashable, Sendable {
     }
 }
 
+public struct SpotifyProfile: Codable, Hashable, Sendable {
+    public let country: String?
+    public let displayName: String?
+    public let email: String?
+    public let id: String
+    
+    private enum CodingKeys: String, CodingKey {
+        case country
+        case displayName = "display_name"
+        case email
+        case id
+    }
+    
+    public init(country: String? = nil, displayName: String? = nil, email: String? = nil, id: String) {
+        self.country = country
+        self.displayName = displayName
+        self.email = email
+        self.id = id
+    }
+}
+
+public struct SpotifyTokenResponse: Codable, Hashable, Sendable {
+    public let accessToken: String
+    public let tokenType: String
+    public let scope: String?
+    public let expiresIn: Int
+    public let refreshToken: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+        case tokenType = "token_type"
+        case scope
+        case expiresIn = "expires_in"
+        case refreshToken = "refresh_token"
+    }
+    
+    public init(accessToken: String, tokenType: String, scope: String? = nil, expiresIn: Int, refreshToken: String? = nil) {
+        self.accessToken = accessToken
+        self.tokenType = tokenType
+        self.scope = scope
+        self.expiresIn = expiresIn
+        self.refreshToken = refreshToken
+    }
+}
+
+public struct SpotifySongSearchResponse: Codable, Hashable, Sendable {
+    public let tracks: SpotifyTracks
+    
+    public init(tracks: SpotifyTracks) {
+        self.tracks = tracks
+    }
+}
+
+public struct SpotifyTracks: Codable, Hashable, Sendable {
+    public let items: [SpotifyTrackItem]?
+    
+    public init(items: [SpotifyTrackItem]? = nil) {
+        self.items = items
+    }
+}
+
+public struct SpotifyTrackItem: Codable, Hashable, Sendable {
+    public let name: String?
+    public let uri: String?
+    
+    public init(name: String? = nil, uri: String? = nil) {
+        self.name = name
+        self.uri = uri
+    }
+}
+
+public struct SpotifyCreatePlaylistResponse: Codable, Hashable, Sendable {
+    public let description: String?
+    public let id: String?
+    public let href: String?
+    public let name: String?
+    
+    public init(description: String? = nil, id: String? = nil, href: String? = nil, name: String? = nil) {
+        self.description = description
+        self.id = id
+        self.href = href
+        self.name = name
+    }
+}
+
+public struct SpotifyAddSongsResponse: Codable, Hashable, Sendable {
+    public let snapshotId: String?
+    
+    private enum CodingKeys: String, CodingKey {
+        case snapshotId = "snapshot_id"
+    }
+    
+    public init(snapshotId: String? = nil) {
+        self.snapshotId = snapshotId
+    }
+}
+
+
