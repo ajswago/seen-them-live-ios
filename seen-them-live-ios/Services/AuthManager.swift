@@ -1,12 +1,6 @@
-//
-//  AuthManager.swift
-//  seen-them-live-ios
-//
-//  Created by Anthony Swago on 7/19/26.
-//
-
 import Foundation
 import SwiftUI
+import FirebaseCore
 import FirebaseAuth
 import GoogleSignIn
 
@@ -18,7 +12,7 @@ public final class AuthManager {
     public private(set) var isLoading: Bool = false
     public var errorMessage: String?
     
-    private var authStateHandle: AuthStateDidChangeListenerHandle?
+    private nonisolated(unsafe) var authStateHandle: AuthStateDidChangeListenerHandle?
     
     public init() {
         setupAuthStateListener()
