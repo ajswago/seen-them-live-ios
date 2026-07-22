@@ -109,7 +109,7 @@ public final class SpotifyClient {
         self.errorMessage = nil
         
         do {
-            let callbackURL = try await withCheckedThrowingContinuation { continuation in
+            let callbackURL: URL = try await withCheckedThrowingContinuation { continuation in
                 let webSession = ASWebAuthenticationSession(
                     url: authURL,
                     callbackURLScheme: "seenthemlive"
