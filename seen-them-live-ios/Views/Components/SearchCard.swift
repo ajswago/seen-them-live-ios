@@ -138,8 +138,14 @@ public struct SearchCard: View {
     }
 }
 
-#Preview {
+#Preview("Enabled State") {
     SearchCard(onSearch: { _ in })
+        .padding()
+        .background(Color(.systemGroupedBackground))
+}
+
+#Preview("Disabled State") {
+    SearchCard(enabled: false, onSearch: { _ in })
         .padding()
         .background(Color(.systemGroupedBackground))
 }
