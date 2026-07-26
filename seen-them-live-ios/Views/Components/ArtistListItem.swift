@@ -49,7 +49,7 @@ public struct ArtistListItem: View {
                             .foregroundColor(.secondary)
                     }
                 }
-                .padding(.leading, indent ? 24 : 0)
+                .padding(.leading, indent ? 36 : 0)
                 
                 Spacer()
                 
@@ -65,7 +65,7 @@ public struct ArtistListItem: View {
                         .foregroundColor(Color(.tertiaryLabel))
                 }
             }
-            .padding(.vertical, 8)
+            .padding(.vertical, 12)
             .contentShape(Rectangle())
         }
         .buttonStyle(.plain)
@@ -105,7 +105,7 @@ public struct LoadingArtistListItemDetailed: View {
                 .frame(width: 20, height: 14)
                 .shimmerLoading()
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
     }
 }
 
@@ -118,11 +118,11 @@ public struct LoadingArtistListItemSimple: View {
                 .fill(Color(.systemGray5))
                 .frame(width: 180, height: 18)
                 .shimmerLoading()
-                .padding(.leading, 24)
+                .padding(.leading, 36)
             
             Spacer()
         }
-        .padding(.vertical, 8)
+        .padding(.vertical, 12)
     }
 }
 
