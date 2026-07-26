@@ -81,14 +81,17 @@ public struct LoadingArtistCard: View {
     public init() {}
     
     public var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             // Artist name skeleton
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color(.systemGray5))
                 .frame(width: 200, height: 24)
                 .shimmerLoading()
             
-            VStack(spacing: 10) {
+            Spacer()
+                .frame(height: 4)
+            
+            VStack(spacing: 6) {
                 // Info rows skeletons
                 HStack {
                     Circle()

@@ -90,7 +90,7 @@ public struct LoadingShowCard: View {
     public init() {}
     
     public var body: some View {
-        VStack(spacing: 16) {
+        VStack(spacing: 12) {
             // Artist name skeleton
             RoundedRectangle(cornerRadius: 4)
                 .fill(Color(.systemGray5))
@@ -106,19 +106,20 @@ public struct LoadingShowCard: View {
             Divider()
                 .padding(.horizontal, 40)
             
-            // Venue skeleton
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Color(.systemGray5))
-                .frame(width: 180, height: 16)
-                .shimmerLoading()
-            
-            // Location skeleton
-            RoundedRectangle(cornerRadius: 4)
-                .fill(Color(.systemGray5))
-                .frame(width: 140, height: 14)
-                .shimmerLoading()
+            // Venue & Location grouped inside a sub-VStack matching ShowCard
+            VStack(spacing: 4) {
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(.systemGray5))
+                    .frame(width: 180, height: 16)
+                    .shimmerLoading()
+                
+                RoundedRectangle(cornerRadius: 4)
+                    .fill(Color(.systemGray5))
+                    .frame(width: 140, height: 14)
+                    .shimmerLoading()
+            }
         }
-        .padding(.vertical, 28)
+        .padding(.vertical, 24)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 16)

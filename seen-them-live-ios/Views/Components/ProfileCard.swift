@@ -98,7 +98,7 @@ public struct LoadingProfileCard: View {
     
     public var body: some View {
         VStack(spacing: 16) {
-            VStack(spacing: 8) {
+            VStack(spacing: 4) { // Match vertical spacing
                 // Profile name skeleton
                 RoundedRectangle(cornerRadius: 4)
                     .fill(Color(.systemGray5))
@@ -115,9 +115,9 @@ public struct LoadingProfileCard: View {
             Divider()
                 .padding(.horizontal, 30)
             
-            HStack(spacing: 40) {
+            HStack(spacing: 32) { // Match column spacing
                 // Stat 1 skeleton
-                VStack(spacing: 6) {
+                VStack(spacing: 4) { // Match vertical spacing
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color(.systemGray5))
                         .frame(width: 40, height: 20)
@@ -128,7 +128,7 @@ public struct LoadingProfileCard: View {
                 .shimmerLoading()
                 
                 // Stat 2 skeleton
-                VStack(spacing: 6) {
+                VStack(spacing: 4) { // Match vertical spacing
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color(.systemGray5))
                         .frame(width: 40, height: 20)
@@ -139,7 +139,7 @@ public struct LoadingProfileCard: View {
                 .shimmerLoading()
                 
                 // Stat 3 skeleton
-                VStack(spacing: 6) {
+                VStack(spacing: 4) { // Match vertical spacing
                     RoundedRectangle(cornerRadius: 4)
                         .fill(Color(.systemGray5))
                         .frame(width: 40, height: 20)
