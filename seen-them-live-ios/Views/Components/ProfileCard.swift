@@ -168,8 +168,8 @@ public struct LoadingProfileCard: View {
 #Preview {
     VStack(spacing: 20) {
         ProfileCard(
-            profileName: "Anthony Swago",
-            email: "ajswago@gmail.com",
+            profileName: "John Doe",
+            email: "john.doe@example.com",
             showCount: 67,
             artistCount: 113,
             venueCount: 29
