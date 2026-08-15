@@ -47,6 +47,7 @@ public struct ShowsListScreen: View {
                                 LoadingExpandableShowListGroup()
                             }
                         }
+                        .padding(.horizontal)
                     }
                 } else if firestoreManager.getShows().isEmpty {
                     VStack {
@@ -83,6 +84,7 @@ public struct ShowsListScreen: View {
                                 )
                             }
                         }
+                        .padding(.horizontal)
                     }
                     .refreshable {
                         await firestoreManager.fetchUser()
