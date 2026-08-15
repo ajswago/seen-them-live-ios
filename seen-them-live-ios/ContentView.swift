@@ -9,6 +9,7 @@ import SwiftUI
 
 public struct ContentView: View {
     @State private var authManager = AuthManager()
+    @State private var firestoreManager = FirestoreManager()
     @State private var selectedTab = 0
     @State private var activeSheet: ActiveSheet?
     
@@ -31,8 +32,7 @@ public struct ContentView: View {
                         onProfile: { activeSheet = .profile },
                         onPlaylist: { activeSheet = .playlist },
                         onAbout: { activeSheet = .about },
-                        onAddShow: { activeSheet = .addShow },
-                        onShowClick: { _ in }
+                        onAddShow: { activeSheet = .addShow }
                     )
                     .tabItem {
                         Label("Shows", systemImage: "clock.fill")
@@ -77,6 +77,12 @@ public struct ContentView: View {
             }
         }
         .environment(authManager)
+        .environment(firestoreManager)
+        .task(id: authManager.isAuthenticated) {
+            if authManager.isAuthenticated {
+                await firestoreManager.fetchUser()
+            }
+        }
     }
 }
 
