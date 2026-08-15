@@ -60,33 +60,22 @@ public struct LoginScreen: View {
                     }
                 }) {
                     HStack(spacing: 12) {
-                        Image("ic_logo_google")
+                        Image("google_logo")
                             .resizable()
                             .scaledToFit()
-                            .frame(width: 20, height: 20)
-                            // Fallback if image asset is missing: show system fallback symbol
-                            .opacity(UIImage(named: "ic_logo_google") != nil ? 1.0 : 0.0)
-                            .overlay(
-                                Image(systemName: "g.circle.fill")
-                                    .font(.headline)
-                                    .foregroundColor(.accentColor)
-                                    .opacity(UIImage(named: "ic_logo_google") != nil ? 0.0 : 1.0)
-                            )
+                            .frame(width: 18, height: 18)
                         
                         Text("Sign in with Google")
-                            .font(.body)
-                            .fontWeight(.semibold)
+                            .font(.system(size: 16, weight: .medium, design: .default))
+                            .foregroundColor(.black)
                     }
-                    .foregroundColor(.primary)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 14)
-                    .background(
-                        RoundedRectangle(cornerRadius: 12)
-                            .fill(Color(.secondarySystemGroupedBackground))
-                            .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
-                    )
+                    .background(Color.white)
+                    .cornerRadius(8)
+                    .shadow(color: Color.black.opacity(0.08), radius: 4, x: 0, y: 2)
                     .overlay(
-                        RoundedRectangle(cornerRadius: 12)
+                        RoundedRectangle(cornerRadius: 8)
                             .stroke(Color(.separator), lineWidth: 0.5)
                     )
                 }
