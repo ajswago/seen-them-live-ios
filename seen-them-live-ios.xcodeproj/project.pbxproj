@@ -34,6 +34,7 @@
 		0B169D58300B109D0040F36F /* seen-them-live-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "seen-them-live-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B169D65300B109E0040F36F /* seen-them-live-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "seen-them-live-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B169D6F300B109E0040F36F /* seen-them-live-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "seen-them-live-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ED15DCFE0A0DCF3C19953D20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist; name = "GoogleService-Info.plist"; path = "seen-them-live-ios/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -90,6 +91,7 @@
 				0B169D68300B109E0040F36F /* seen-them-live-iosTests */,
 				0B169D72300B109E0040F36F /* seen-them-live-iosUITests */,
 				0B169D59300B109D0040F36F /* Products */,
+				ED15DCFE0A0DCF3C19953D20 /* GoogleService-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -417,6 +419,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -462,6 +465,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
