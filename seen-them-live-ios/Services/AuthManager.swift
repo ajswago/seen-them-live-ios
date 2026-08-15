@@ -54,6 +54,17 @@ public final class AuthManager {
         self.isLoading = true
         self.errorMessage = nil
         
+        // Read CLIENT_ID from GoogleService-Info.plist to configure Google Sign-In dynamically
+        guard let path = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist"),
+              let plist = NSDictionary(contentsOfFile: path),
+              let clientID = plist["CLIENT_ID"] as? String else {
+            self.errorMessage = "GoogleService-Info.plist or CLIENT_ID key is missing."
+            self.isLoading = false
+            return
+        }
+        
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+        
         do {
             let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: presentingViewController)
             let user = result.user
