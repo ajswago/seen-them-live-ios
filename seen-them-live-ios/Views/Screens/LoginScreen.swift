@@ -30,23 +30,13 @@ public struct LoginScreen: View {
             VStack(spacing: 32) {
                 Spacer()
                 
-                // Glowing Circular App Logo
-                ZStack {
-                    Circle()
-                        .fill(
-                            LinearGradient(
-                                colors: [Color.accentColor, Color.purple],
-                                startPoint: .topLeading,
-                                endPoint: .bottomTrailing
-                            )
-                        )
-                        .frame(width: 140, height: 140)
-                        .shadow(color: Color.accentColor.opacity(0.3), radius: 15, x: 0, y: 8)
-                    
-                    Image(systemName: "guitars.fill")
-                        .font(.system(size: 64))
-                        .foregroundColor(.white)
-                }
+                // App Logo
+                Image("app_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 140, height: 140)
+                    .cornerRadius(24)
+                    .shadow(color: Color.black.opacity(0.15), radius: 10, x: 0, y: 6)
                 
                 VStack(spacing: 8) {
                     Text("Seen Them Live")
