@@ -35,7 +35,7 @@
 		0B169D58300B109D0040F36F /* seen-them-live-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "seen-them-live-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B169D65300B109E0040F36F /* seen-them-live-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "seen-them-live-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B169D6F300B109E0040F36F /* seen-them-live-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "seen-them-live-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		ED15DCFE0A0DCF3C19953D20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist; lastKnownFileType = text.plist; name = "GoogleService-Info.plist"; path = "seen-them-live-ios/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		ED15DCFE0A0DCF3C19953D20 /* GoogleService-Info.plist */ = {isa = PBXFileReference; explicitFileType = text.plist; name = "GoogleService-Info.plist"; path = "seen-them-live-ios/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -411,13 +411,6 @@
 		0B169D7A300B109E0040F36F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleURLTypes = (
-					{
-						CFBundleURLSchemes = (
-							com.googleusercontent.apps.300722405805-9qtnviq8ae0iqeso23lnf8dmviimev2i,
-						);
-					},
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -428,6 +421,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -463,13 +457,6 @@
 		0B169D7B300B109E0040F36F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_KEY_CFBundleURLTypes = (
-					{
-						CFBundleURLSchemes = (
-							com.googleusercontent.apps.300722405805-9qtnviq8ae0iqeso23lnf8dmviimev2i,
-						);
-					},
-				);
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
@@ -480,6 +467,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
