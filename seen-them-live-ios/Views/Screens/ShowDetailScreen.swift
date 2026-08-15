@@ -108,11 +108,13 @@ public struct ShowDetailScreen: View {
                         VStack(spacing: 24) {
                             LoadingShowCard()
                             
-                            VStack(alignment: .leading, spacing: 8) {
-                                sectionHeader("Also at this show")
-                                ForEach(0..<2, id: \.self) { _ in
-                                    LoadingArtistListItemDetailed()
-                                    Divider()
+                            if isSaved {
+                                VStack(alignment: .leading, spacing: 8) {
+                                    sectionHeader("Also at this show")
+                                    ForEach(0..<2, id: \.self) { _ in
+                                        LoadingArtistListItemDetailed()
+                                        Divider()
+                                    }
                                 }
                             }
                             
@@ -158,27 +160,29 @@ public struct ShowDetailScreen: View {
                                 tourName: show.tourName
                             )
                             
-                            VStack(alignment: .leading, spacing: 0) {
-                                sectionHeader("Also at this show")
-                                    .padding(.bottom, 8)
-                                
-                                ForEach(linkedShows) { linked in
-                                    ArtistListItem(
-                                        artistName: linked.artist,
-                                        onClick: {
-                                            path.append(linked.id)
+                            if isSaved {
+                                VStack(alignment: .leading, spacing: 0) {
+                                    sectionHeader("Also at this show")
+                                        .padding(.bottom, 8)
+                                    
+                                    ForEach(linkedShows) { linked in
+                                        ArtistListItem(
+                                            artistName: linked.artist,
+                                            onClick: {
+                                                path.append(linked.id)
+                                            }
+                                        )
+                                        Divider()
+                                    }
+                                    
+                                    FindMoreListItem(enabled: true) {
+                                        showRelatedSheet = true
+                                        Task {
+                                            await findRelatedShows()
                                         }
-                                    )
+                                    }
                                     Divider()
                                 }
-                                
-                                FindMoreListItem(enabled: true) {
-                                    showRelatedSheet = true
-                                    Task {
-                                        await findRelatedShows()
-                                    }
-                                }
-                                Divider()
                             }
                             
                             VStack(alignment: .leading, spacing: 0) {
