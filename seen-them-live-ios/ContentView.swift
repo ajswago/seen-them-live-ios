@@ -42,8 +42,7 @@ public struct ContentView: View {
                     ArtistListScreen(
                         onProfile: { activeSheet = .profile },
                         onPlaylist: { activeSheet = .playlist },
-                        onAbout: { activeSheet = .about },
-                        onArtistClick: { _ in }
+                        onAbout: { activeSheet = .about }
                     )
                     .tabItem {
                         Label("Artists", systemImage: "person.3.fill")
