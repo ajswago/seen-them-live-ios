@@ -85,7 +85,7 @@ public struct ArtistProfileScreen: View {
                                     date: show.date,
                                     onClick: {
                                         // Push ShowDetailScreen using its ID
-                                        path.append(show.id)
+                                        path.append(ArtistRoute.showDetail(id: show.id))
                                     }
                                 )
                                 Divider()

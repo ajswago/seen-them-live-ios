@@ -23,6 +23,11 @@ public enum ArtistSort: String, CaseIterable, Identifiable {
     }
 }
 
+public enum ArtistRoute: Hashable, Sendable {
+    case artistProfile(mbid: String)
+    case showDetail(id: String)
+}
+
 public struct ArtistListScreen: View {
     @Environment(AuthManager.self) private var authManager
     @Environment(FirestoreManager.self) private var firestoreManager
@@ -113,7 +118,7 @@ public struct ArtistListScreen: View {
                                     showCount: artist.showCount,
                                     showAvatar: true,
                                     onClick: {
-                                        path.append(artist.id)
+                                        path.append(ArtistRoute.artistProfile(mbid: artist.id))
                                     }
                                 )
                                 Divider()
@@ -136,8 +141,16 @@ public struct ArtistListScreen: View {
                     onLogout: { authManager.signOut() }
                 )
             }
-            .navigationDestination(for: String.self) { artistId in
-                ArtistProfileScreen(artistMbid: artistId, path: $path)
+            .navigationDestination(for: ArtistRoute.self) { route in
+                switch route {
+                case .artistProfile(let mbid):
+                    ArtistProfileScreen(artistMbid: mbid, path: $path)
+                case .showDetail(let showId):
+                    ShowDetailScreen(showId: showId, path: $path)
+                }
+            }
+            .navigationDestination(for: String.self) { showId in
+                ShowDetailScreen(showId: showId, path: $path)
             }
         }
     }
