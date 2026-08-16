@@ -295,22 +295,30 @@ public final class FirestoreManager {
     
     public func getMapItems() -> [MapItemModel] {
         let setlists = userData.setlists ?? []
-        var venueCounts: [String: (count: Int, lat: Double?, long: Double?)] = [:]
+        var venueCounts: [String: (count: Int, lat: Double?, long: Double?, city: String?, state: String?)] = [:]
         
         for setlist in setlists {
             guard let venue = setlist.venue, let venueName = venue.name else { continue }
             let lat = venue.city?.coords?.lat
             let long = venue.city?.coords?.long
+            let city = venue.city?.name
+            let state = venue.city?.stateCode ?? venue.city?.state
             
             if let existing = venueCounts[venueName] {
-                venueCounts[venueName] = (count: existing.count + 1, lat: lat ?? existing.lat, long: long ?? existing.long)
+                venueCounts[venueName] = (
+                    count: existing.count + 1,
+                    lat: lat ?? existing.lat,
+                    long: long ?? existing.long,
+                    city: city ?? existing.city,
+                    state: state ?? existing.state
+                )
             } else {
-                venueCounts[venueName] = (count: 1, lat: lat, long: long)
+                venueCounts[venueName] = (count: 1, lat: lat, long: long, city: city, state: state)
             }
         }
         
         return venueCounts.map { (name, info) in
-            MapItemModel(name: name, count: info.count, lat: info.lat, long: info.long)
+            MapItemModel(name: name, count: info.count, lat: info.lat, long: info.long, city: info.city, state: info.state)
         }.sorted { ($0.count ?? 0) > ($1.count ?? 0) }
     }
 }
