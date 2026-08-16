@@ -249,8 +249,10 @@ public final class FirestoreManager {
                 guard let songs = group.song else { continue }
                 for song in songs {
                     guard let songName = song.name, !songName.isEmpty else { continue }
-                    let coverName = song.cover?.name
                     let isTape = song.tape ?? false
+                    guard !isTape else { continue }
+                    
+                    let coverName = song.cover?.name
                     
                     if let existing = trackCounts[songName] {
                         trackCounts[songName] = (count: existing.count + 1, coverArtist: coverName ?? existing.coverArtist, isTape: isTape || existing.isTape)
