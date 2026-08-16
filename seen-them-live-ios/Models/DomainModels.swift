@@ -103,12 +103,16 @@ public struct MapItemModel: Hashable, Identifiable, Sendable {
     public let count: Int?
     public let lat: Double?
     public let long: Double?
+    public let city: String?
+    public let state: String?
     
-    public init(name: String?, count: Int?, lat: Double?, long: Double?) {
+    public init(name: String?, count: Int?, lat: Double?, long: Double?, city: String? = nil, state: String? = nil) {
         self.name = name
         self.count = count
         self.lat = lat
         self.long = long
+        self.city = city
+        self.state = state
     }
 }
 
