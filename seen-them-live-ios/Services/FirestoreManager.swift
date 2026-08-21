@@ -208,6 +208,12 @@ public final class FirestoreManager {
     
     public func getShowsForArtist(artistMbid: String) -> [GroupedShowModel] {
         let setlists = userData.setlists ?? []
+        
+        // Group all setlists by date and venue ID to look up other artists at the show
+        let setlistsByDateAndVenue = Dictionary(grouping: setlists) { setlist in
+            "\(setlist.eventDate ?? "")-\(setlist.venue?.id ?? "")"
+        }
+        
         let matchingSetlists = setlists.filter { setlist in
             setlist.artist?.mbid == artistMbid || setlist.artist?.name == artistMbid
         }
@@ -222,7 +228,12 @@ public final class FirestoreManager {
             }
             
             let state = setlist.venue?.city?.stateCode ?? setlist.venue?.city?.state ?? ""
-            let artistName = setlist.artist?.name ?? ""
+            
+            // Get other artists seen at this show (same date and venue, excluding current artist)
+            let key = "\(dateString)-\(setlist.venue?.id ?? "")"
+            let otherArtists = setlistsByDateAndVenue[key]?
+                .filter { $0.artist?.mbid != artistMbid && $0.artist?.name != artistMbid }
+                .compactMap { $0.artist?.name } ?? []
             
             return GroupedShowModel(
                 id: id,
@@ -230,7 +241,7 @@ public final class FirestoreManager {
                 city: city,
                 state: state,
                 date: date,
-                artists: [artistName]
+                artists: otherArtists
             )
         }.sorted { $0.date > $1.date }
     }
