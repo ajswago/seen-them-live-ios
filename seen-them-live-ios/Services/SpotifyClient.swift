@@ -47,6 +47,40 @@ public final class SpotifyClient {
     
     public init(session: URLSession = .shared) {
         self.session = session
+        loadTokens()
+    }
+    
+    private func saveTokens() {
+        UserDefaults.standard.set(refreshToken, forKey: "spotify_refresh_token")
+        UserDefaults.standard.set(tokenExpiryDate, forKey: "spotify_token_expiry_date")
+        UserDefaults.standard.set(accessToken, forKey: "spotify_access_token")
+        UserDefaults.standard.set(spotifyUserId, forKey: "spotify_user_id")
+    }
+    
+    private func loadTokens() {
+        self.refreshToken = UserDefaults.standard.string(forKey: "spotify_refresh_token")
+        self.tokenExpiryDate = UserDefaults.standard.object(forKey: "spotify_token_expiry_date") as? Date
+        self.accessToken = UserDefaults.standard.string(forKey: "spotify_access_token")
+        self.spotifyUserId = UserDefaults.standard.string(forKey: "spotify_user_id")
+    }
+    
+    public func checkSpotifyAuth() async {
+        guard refreshToken != nil else { return }
+        self.isLoading = true
+        self.errorMessage = nil
+        do {
+            try await refreshAccessTokenIfNeeded()
+            try await fetchSpotifyProfile()
+        } catch {
+            print("Failed to silently restore Spotify session: \(error)")
+            // Clear invalid session
+            self.accessToken = nil
+            self.refreshToken = nil
+            self.tokenExpiryDate = nil
+            self.spotifyUserId = nil
+            saveTokens()
+        }
+        self.isLoading = false
     }
     
     // MARK: - PKCE Utilities
@@ -175,6 +209,7 @@ public final class SpotifyClient {
         self.accessToken = tokenResponse.accessToken
         self.refreshToken = tokenResponse.refreshToken ?? self.refreshToken
         self.tokenExpiryDate = Date().addingTimeInterval(TimeInterval(tokenResponse.expiresIn))
+        saveTokens()
     }
     
     public func refreshAccessTokenIfNeeded() async throws {
@@ -207,6 +242,7 @@ public final class SpotifyClient {
         self.accessToken = tokenResponse.accessToken
         self.refreshToken = tokenResponse.refreshToken ?? self.refreshToken
         self.tokenExpiryDate = Date().addingTimeInterval(TimeInterval(tokenResponse.expiresIn))
+        saveTokens()
     }
     
     // MARK: - REST API Implementations
@@ -226,6 +262,7 @@ public final class SpotifyClient {
         
         let profile = try JSONDecoder().decode(SpotifyProfile.self, from: data)
         self.spotifyUserId = profile.id
+        saveTokens()
     }
     
     private func searchSong(artist: String, title: String) async -> String? {
