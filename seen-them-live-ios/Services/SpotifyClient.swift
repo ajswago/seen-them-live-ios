@@ -146,7 +146,7 @@ public final class SpotifyClient {
             let callbackURL: URL = try await withCheckedThrowingContinuation { continuation in
                 let webSession = ASWebAuthenticationSession(
                     url: authURL,
-                    callbackURLScheme: "seenthemlive"
+                    callbackURLScheme: "com.swago.seenthemlive"
                 ) { url, error in
                     if let error = error {
                         continuation.resume(throwing: error)
