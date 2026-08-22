@@ -9,6 +9,7 @@ import Testing
 import Foundation
 @testable import seen_them_live_ios
 
+@MainActor
 struct seen_them_live_iosTests {
 
     @Test func testCommaSeparatedStringFormatting() async throws {
