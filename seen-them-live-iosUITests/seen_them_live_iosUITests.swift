@@ -23,12 +23,21 @@ final class seen_them_live_iosUITests: XCTestCase {
     }
 
     @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testLoginScreenElements() throws {
         let app = XCUIApplication()
         app.launch()
 
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // Verify "Seen Them Live" title is present
+        let titleText = app.staticTexts["Seen Them Live"]
+        XCTAssertTrue(titleText.exists)
+
+        // Verify description text is present
+        let descText = app.staticTexts["Track your concert history in one place"]
+        XCTAssertTrue(descText.exists)
+
+        // Verify "Sign in with Google" button is present
+        let googleButton = app.buttons["Sign in with Google"]
+        XCTAssertTrue(googleButton.exists)
     }
 
     @MainActor
