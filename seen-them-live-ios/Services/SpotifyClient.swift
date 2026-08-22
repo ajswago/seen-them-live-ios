@@ -45,6 +45,8 @@ public final class SpotifyClient {
     private let tokenURL = "https://accounts.spotify.com/api/token"
     private let session: URLSession
     
+    private var activeAuthSession: ASWebAuthenticationSession?
+    
     public init(session: URLSession = .shared) {
         self.session = session
         loadTokens()
@@ -147,7 +149,8 @@ public final class SpotifyClient {
                 let webSession = ASWebAuthenticationSession(
                     url: authURL,
                     callbackURLScheme: "com.swago.seenthemlive"
-                ) { url, error in
+                ) { [weak self] url, error in
+                    self?.activeAuthSession = nil
                     if let error = error {
                         continuation.resume(throwing: error)
                     } else if let url = url {
@@ -159,6 +162,8 @@ public final class SpotifyClient {
                 
                 webSession.presentationContextProvider = PresentationAnchorProvider.shared
                 webSession.prefersEphemeralWebBrowserSession = false
+                
+                self.activeAuthSession = webSession
                 webSession.start()
             }
             
@@ -201,8 +206,10 @@ public final class SpotifyClient {
         request.httpBody = components.query?.data(using: .utf8)
         
         let (data, response) = try await session.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+        if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+            let body = String(data: data, encoding: .utf8) ?? ""
+            print("Spotify Token Request Failed (\(httpResponse.statusCode)): \(body)")
+            throw NSError(domain: "SpotifyClient", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Token request failed (\(httpResponse.statusCode)): \(body)"])
         }
         
         let tokenResponse = try JSONDecoder().decode(SpotifyTokenResponse.self, from: data)
@@ -234,8 +241,10 @@ public final class SpotifyClient {
         request.httpBody = components.query?.data(using: .utf8)
         
         let (data, response) = try await session.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+        if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+            let body = String(data: data, encoding: .utf8) ?? ""
+            print("Spotify Token Refresh Failed (\(httpResponse.statusCode)): \(body)")
+            throw NSError(domain: "SpotifyClient", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Token refresh failed (\(httpResponse.statusCode)): \(body)"])
         }
         
         let tokenResponse = try JSONDecoder().decode(SpotifyTokenResponse.self, from: data)
@@ -256,8 +265,10 @@ public final class SpotifyClient {
         request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         
         let (data, response) = try await session.data(for: request)
-        guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode) else {
-            throw URLError(.badServerResponse)
+        if let httpResponse = response as? HTTPURLResponse, !(200...299).contains(httpResponse.statusCode) {
+            let body = String(data: data, encoding: .utf8) ?? ""
+            print("Spotify Profile Fetch Failed (\(httpResponse.statusCode)): \(body)")
+            throw NSError(domain: "SpotifyClient", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: "Profile fetch failed (\(httpResponse.statusCode)): \(body)"])
         }
         
         let profile = try JSONDecoder().decode(SpotifyProfile.self, from: data)
