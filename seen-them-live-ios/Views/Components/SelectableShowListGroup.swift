@@ -46,6 +46,7 @@ public struct SelectableShowListGroup: View {
                 expanded: expanded,
                 onExpandedChange: { expanded = $0 }
             )
+            .padding(.horizontal)
             
             Divider()
             
@@ -70,6 +71,7 @@ public struct LoadingSelectableShowListGroup: View {
     public var body: some View {
         VStack(alignment: .leading, spacing: 0) {
             LoadingExpandableShowHeader()
+                .padding(.horizontal)
             
             Divider()
             

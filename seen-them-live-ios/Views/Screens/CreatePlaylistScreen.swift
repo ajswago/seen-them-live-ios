@@ -133,8 +133,6 @@ public struct CreatePlaylistScreen: View {
                                 }
                             }
                             .background(Color(.secondarySystemGroupedBackground))
-                            .cornerRadius(16)
-                            .padding(.horizontal)
                         }
                         .padding(.vertical)
                     }

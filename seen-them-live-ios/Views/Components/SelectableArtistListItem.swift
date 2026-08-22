@@ -36,6 +36,7 @@ public struct SelectableArtistListItem: View {
                 
                 Spacer()
             }
+            .padding(.horizontal)
             .padding(.vertical, 12)
             .contentShape(Rectangle())
         }
@@ -62,6 +63,7 @@ public struct LoadingSelectableArtistListItem: View {
             
             Spacer()
         }
+        .padding(.horizontal)
         .padding(.vertical, 12)
     }
 }
