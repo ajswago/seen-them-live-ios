@@ -81,6 +81,15 @@ public struct CreatePlaylistScreen: View {
                                 .cornerRadius(10)
                         }
                         
+                        if let error = spotifyClient.errorMessage {
+                            Text(error)
+                                .font(.caption)
+                                .foregroundColor(.red)
+                                .multilineTextAlignment(.center)
+                                .padding(.horizontal, 32)
+                                .padding(.top, 8)
+                        }
+                        
                         Spacer()
                     }
                 } else {
