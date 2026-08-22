@@ -45,6 +45,8 @@ public final class SpotifyClient {
     private let tokenURL = "https://accounts.spotify.com/api/token"
     private let session: URLSession
     
+    private var activeAuthSession: ASWebAuthenticationSession?
+    
     public init(session: URLSession = .shared) {
         self.session = session
         loadTokens()
@@ -147,7 +149,8 @@ public final class SpotifyClient {
                 let webSession = ASWebAuthenticationSession(
                     url: authURL,
                     callbackURLScheme: "com.swago.seenthemlive"
-                ) { url, error in
+                ) { [weak self] url, error in
+                    self?.activeAuthSession = nil
                     if let error = error {
                         continuation.resume(throwing: error)
                     } else if let url = url {
@@ -159,6 +162,8 @@ public final class SpotifyClient {
                 
                 webSession.presentationContextProvider = PresentationAnchorProvider.shared
                 webSession.prefersEphemeralWebBrowserSession = false
+                
+                self.activeAuthSession = webSession
                 webSession.start()
             }
             
